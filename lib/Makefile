@@ -1,4 +1,4 @@
-NCBITEXTLIB=../../NCBITextLib
+NCBITEXTLIB=$(NCBITEXTLIB_PATH)
 SRC_DIR=./
 TRASHFILES = *.o *~ *.bak core *.a
 LIB_INC=-I. -I$(NCBITEXTLIB)/include
@@ -13,7 +13,7 @@ Ab3P.o: AbbrvE.h
 AbbrvE.o: AbbrvE.h
 
 %.o: $(SRC_DIR)/%.C
-	g++ -c $(OS) $< -o $@ $(LIB_INC)
+	g++ -fpic -c $(OS) $< -o $@ $(LIB_INC)
 
 clean:
 	rm -f $(TRASHFILES)

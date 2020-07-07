@@ -1,7 +1,9 @@
-NCBITEXTLIB=../NCBITextLib
+NCBITEXTLIB=$(NCBITEXTLIB_PATH)
 LIBPATH=./lib
 OS=-g
 # OS=-O
+objects=$(wildcard $(LIBPATH)/*.o)
+NCBIobjects=$(wildcard $(NCBITEXTLIB)/lib/*.o)
 
 
 .KEEP_STATE:
@@ -10,7 +12,7 @@ OS=-g
 	g++ $(OS) -o $@ $< -L$(LIBPATH) -lAb3P -L$(NCBITEXTLIB)/lib -lText
 
 %.o: %.C
-	g++ -c -fpic $(OS) -I$(LIBPATH) -I$(NCBITEXTLIB)/include $< -o $@
+	g++ -Wall -fpic -c $(OS) -I$(LIBPATH) -I$(NCBITEXTLIB)/include $< -o $@
 
 all:
 	make programs
@@ -21,7 +23,7 @@ programs:
 	make make_wordSet
 	make make_wordCountHash
 	make identify_abbr
-	make wrapper.o
+	make wrapper.so
 
 library:
 	cd lib; make
@@ -41,7 +43,7 @@ test2:
 clean:
 	cd lib; make clean
 	rm -f WordData/cshset_* WordData/hshset_*
-	rm -f identify_abbr make_wordCountHash make_wordSet *.o *~
+	rm -f identify_abbr make_wordCountHash make_wordSet *.o *.so *~
 
 make_wordSet:		make_wordSet.o
 make_wordCountHash:	make_wordCountHash.o
@@ -49,4 +51,7 @@ identify_abbr:		identify_abbr.o lib/libAb3P.a
 identify_abbr.o:	lib/Ab3P.h
 identify_abbr_loc:	identify_abbr.o lib/libAb3P.a
 identify_abbr_loc.o:	lib/Ab3P.h
-wrapper.o:	lib/Ab3P.h
+wrapper.so: 		wrapper.o
+	g++ -shared -o wrapper.so wrapper.o $(objects) $(NCBIobjects)
+wrapper.o: 		lib/Ab3P.h
+
