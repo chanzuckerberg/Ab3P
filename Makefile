@@ -23,7 +23,7 @@ programs:
 	make make_wordSet
 	make make_wordCountHash
 	make identify_abbr
-	make wrapper.so
+	make identify_abbr_wrapper.so
 
 library:
 	cd lib; make
@@ -45,13 +45,13 @@ clean:
 	rm -f WordData/cshset_* WordData/hshset_*
 	rm -f identify_abbr make_wordCountHash make_wordSet *.o *.so *~
 
-make_wordSet:		make_wordSet.o
-make_wordCountHash:	make_wordCountHash.o
-identify_abbr:		identify_abbr.o lib/libAb3P.a
-identify_abbr.o:	lib/Ab3P.h
-identify_abbr_loc:	identify_abbr.o lib/libAb3P.a
-identify_abbr_loc.o:	lib/Ab3P.h
-wrapper.so: 		wrapper.o
+make_wordSet:							make_wordSet.o
+make_wordCountHash:				make_wordCountHash.o
+identify_abbr:						identify_abbr.o lib/libAb3P.a
+identify_abbr.o:					lib/Ab3P.h
+identify_abbr_loc:				identify_abbr.o lib/libAb3P.a
+identify_abbr_loc.o:			lib/Ab3P.h
+identify_abbr_wrapper.so:	identify_abbr_wrapper.o
 	g++ -shared -o wrapper.so wrapper.o $(objects) $(NCBIobjects)
-wrapper.o: 		lib/Ab3P.h
+identify_abbr_wrapper.o: 	lib/Ab3P.h
 

@@ -116,6 +116,13 @@ meaning as follows:
     //
       any other comments (not starting with '!')
 
+### With position-independent code/executable (PIC/PIE)
+
+In order to run from any directory, two env vars must be set at runtime in addition to compiling all code with `-fpic`:
+
+1. `NCBITEXTLIB_PATH` (with no trailing `/`, e.g., `/home/<user>/NCBITextLib`)
+2. `AB3P_WORDDATA_PATH` (e.g., `/home/<user>/Ab3P/WordData/`)
+
 ## Previous, non-GitHub versions ##
 
 v1.5   Easier to run identify_abbr from a directory other than where built.
