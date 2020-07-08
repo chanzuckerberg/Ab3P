@@ -118,10 +118,13 @@ meaning as follows:
 
 ### With position-independent code/executable (PIC/PIE)
 
-In order to run from any directory, two env vars must be set at runtime in addition to compiling all code with `-fpic`:
+In order to run from any directory, two env vars must be set in addition to compiling all code with `-fpic`:
 
-1. `NCBITEXTLIB_DIRPATH` (with no trailing `/`, e.g., `/home/<user>/NCBITextLib`)
-2. `AB3P_WORDDATA_DIRPATH` (e.g., `/home/<user>/Ab3P/WordData/`)
+1. At compile-time: 
+`NCBITEXTLIB_DIRPATH` (with no trailing `/`, e.g., `/home/<user>/NCBITextLib`)
+
+2. At runtime:
+`AB3P_WORDDATA_DIRPATH` (e.g., `/home/<user>/Ab3P/WordData/`)
 
 ## Previous, non-GitHub versions ##
 
