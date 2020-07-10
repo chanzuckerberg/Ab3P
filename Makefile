@@ -52,6 +52,6 @@ identify_abbr.o:					lib/Ab3P.h
 identify_abbr_loc:				identify_abbr.o lib/libAb3P.a
 identify_abbr_loc.o:			lib/Ab3P.h
 identify_abbr_wrapper.so:	identify_abbr_wrapper.o
-	g++ -shared -o wrapper.so wrapper.o $(objects) $(NCBIobjects)
+	g++ -shared -o identify_abbr_wrapper.so identify_abbr_wrapper.o $(objects) $(NCBIobjects)
 identify_abbr_wrapper.o: 	lib/Ab3P.h
 
